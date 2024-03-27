@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>API Data Merge Example</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <script>
+      const apiUrl1 = "https://data.cityofnewyork.us/resource/hg8x-zxpr.json"; //api for affordablle buildings
+      const apiUrl2 = "https://data.cityofnewyork.us/resource/9ay9-xkek.json"; //api for other info
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+      async function fetchData(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      async function fetchAndMergeData(apiUrl1, apiUrl2) {
+        try {
+          const data1 = await fetchData(apiUrl1);
+          const data2 = await fetchData(apiUrl2);
+
+          return mergeDataOnProjectID(data1, data2);
+        } catch (error) {
+          console.error("Failed to fetch or merge data:", error);
+        }
+      }
+
+      function mergeDataOnProjectID(dataSet1, dataSet2) {
+        const mergedData = [];
+
+        const dataSet2Map = new Map(
+          dataSet2.map((item) => [item.projectId, item])
+        );
+
+        dataSet1.forEach((item1) => {
+          const item2 = dataSet2Map.get(item1.projectId);
+          if (item2) {
+            mergedData.push({ ...item1, ...item2 });
+          } else {
+            mergedData.push(item1);
+          }
+        });
+
+        return mergedData;
+      }
+
+      fetchAndMergeData(apiUrl1, apiUrl2)
+        .then((mergedData) => {
+          console.log("Merged Data:", mergedData);
+        })
+        .catch((error) => {
+          console.error("Error processing merged data:", error);
+        });
+    </script>
   </body>
 </html>
+
+
+//create a component that serves as a container for API data
+
+// APT LIST > APT (each entry)
+// useEffect to get the data, and load into a state variable in the container 
+// create a component for each entry and pass it as a prop
+// for each entry in the state variable, render one component for each entry
