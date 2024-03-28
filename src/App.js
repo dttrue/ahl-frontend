@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/auth/Signin';
 import SignUp from './components/auth/SignUp';
+import AuthDetails from './components/auth/AuthDetails';
 
 function App() {
   return (
@@ -15,13 +16,14 @@ function App() {
       <input type="text" className="search__bar" placeholder="Enter a neighborhood or ZIP code" />
       <Link to="/signin">Sign In</Link>
       <Link to="/signup">Create Account</Link>
+      
 
       <Routes>
           <Route path="/" element={<div>Home Page Content</div>} />  {/* Replace with your homepage content */}
           <Route path="/signin" element={<SignIn />} />  {/* SignIn component for login */}
           <Route path="/signup" element={<SignUp />} />  {/* SignIn component for login */}
         </Routes>
-
+        <AuthDetails/>
       </div>
     </div>
     </Router>
