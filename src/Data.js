@@ -1,52 +1,64 @@
-const apiUrl1 = "https://data.cityofnewyork.us/resource/hg8x-zxpr.json"; //api for affordablle buildings
-const apiUrl2 = "https://data.cityofnewyork.us/resource/9ay9-xkek.json"; //api for other info
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
+function HousingProject() {
+    const [projectData, setProjectData] = useState(null);
 
-async function fetchData(url){
-  const response = await fetch(url);
-  if(!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
-  return response.json()
-}
-
-async function fetchAndMergeData(apiUrl1, apiUrl2){
-  try {
-    const data1 = await fetchData(apiUrl1);
-    const data2 = await fetchData(apiUrl2);
-
-    return mergeDataOnProjectID(data1, data2);
-  } catch (error) {
-    console.error("Failed to fetch or merge data:", error);
-  }
-}
-
-
-function mergeDataOnProjectID(dataSet1, dataSet2) {
-
-  const mergedData = [];
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              // Fetching both sources in parallel
+              const [responseOne, responseTwo] = await Promise.all([
+                  axios.get('http://localhost:1117/api/housing'),
+                  axios.get("https://data.cityofnewyork.us/resource/9ay9-xkek.json")
+              ]);
+              
+              // Combining the data from both responses
+              setProjectData([...responseOne.data, ...responseTwo.data]);
+          } catch (error) {
+              console.error('Failed to fetch housing data:', error);
+          }
+      };
   
-  const dataSet2Map = new Map(dataSet2.map((item) => [item.projectId, item]));
+      fetchData();
+  }, []);
+  
 
-  dataSet1.forEach((item1) => {
-    const item2 = dataSet2Map.get(item1.projectId);
-    if (item2) {
-      
-      mergedData.push({ ...item1, ...item2 });
-    } else {
-      mergedData.push(item1);
+  
+    if (!projectData) {
+        return <div>Loading...</div>;
     }
-  });
 
- return mergedData
+    return (
+      <div className="housing-projects">
+          {projectData.map((project, index) => (
+              <div key={index} className="housing-project">
+                  <h2>{project.project_name}</h2>
+                  <p>Address: {project.house_number} {project.street_name}, {project.borough}, {project.postcode}</p>
+                  <p>Total Units: {project.total_units}</p>
+                  <p>Unit Breakdown:</p>
+                  <ul>
+                      <li>Extremely Low Income Units: {project.extremely_low_income_units}</li>
+                      <li>Very Low Income Units: {project.very_low_income_units}</li>
+                      <li>Low Income Units: {project.low_income_units}</li>
+                      <li>Moderate Income Units: {project.moderate_income_units}</li>
+                      <li>Middle Income Units: {project.middle_income_units}</li>
+                      <li>Other Income Units: {project.other_income_units}</li>
+                      <li>Studio Units: {project.studio_units}</li>
+                      <li>1 Bedroom Units: {project._1_br_units}</li>
+                      <li>2 Bedroom Units: {project._2_br_units}</li>
+                      <li>3 Bedroom Units: {project._3_br_units}</li>
+                      <li>4 Bedroom Units: {project._4_br_units}</li>
+                      <li>5 Bedroom Units: {project._5_br_units}</li>
+                      <li>6 Bedroom Units: {project._6_br_units}</li>
+                      <li>Counted_rental_units: {project.counted_rental_units}</li>
+                      <li>Rent:{project.lowactualrent}</li>
+                  </ul>
+              </div>
+          ))}
+      </div>
+  );
 }
 
-fetchAndMergeData(apiUrl1, apiUrl2)
-.then(mergedData => {
-  console.log('Merged Data:', mergedData);
-})
-.catch(error => {
-  console.error("Error processing merged data:", error)
-})
+export default HousingProject;
 
- export default fetchAndMergeData;
