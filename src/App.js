@@ -1,6 +1,6 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import HousingProject from './Data';
+import HousingProject from './HousingDetials';
 
 
 function App() {
