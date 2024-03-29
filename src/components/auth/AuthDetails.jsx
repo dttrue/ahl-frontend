@@ -1,32 +1,43 @@
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import React, { useEffect, useState } from 'react'
-import auth  from "../../firebase"
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import auth from "../../firebase";
 
 const AuthDetails = () => {
-const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
 
-useEffect(() => {
+  useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setAuthUser(user)
-        }else {
-            setAuthUser(null);
-        }
-    })
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
     return () => {
-        listen();
-    }
-}, []);
+      listen();
+    };
+  }, []); //comes in effect when the user signs in or out
 
-const userSignOut = () => {
-signOut(auth).then (() => {
-    console.log('sign out successful')
-}).catch(error => console.log(error))
-}
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("sign out successful");
+      })
+      .catch((error) => console.log(error));
+  }; //signs out the usery
 
   return (
-    <div>{ authUser ? <><p> {`Signed In as ${authUser.email}`}</p><button onClick={userSignOut}>Sign Out</button></> :  <p>Signed Out</p>}</div>
-  )
-}
+    <div>
+      {authUser ? (
+        <>
+          <p> {`Signed In as ${authUser.email}`}</p>
+          <button onClick={userSignOut}>Sign Out</button>
+        </>
+      ) : (
+        <p>Signed Out</p>
+      )}
+    </div>
+  );
+};
 
-export default AuthDetails
+export default AuthDetails;

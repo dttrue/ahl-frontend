@@ -15,7 +15,7 @@ const SignIn = () => {
     }).catch((error) => {
         console.log(error)
     })
-  }
+  } /*signs in the user*/
 
   return (
     <div className="sign-in-container">

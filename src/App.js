@@ -14,8 +14,8 @@ function App() {
       <div className="homepage__body">
       <h1 className='homepage__title'>Affordable Homes</h1> 
       <input type="text" className="search__bar" placeholder="Enter a neighborhood or ZIP code" />
-      <Link to="/signin">Sign In</Link>
-      <Link to="/signup">Create Account</Link>
+      <Link to="/signin">Sign In</Link> {/* Link to SignIn component for login*/}
+      <Link to="/signup">Create Account</Link> {/* Link to SignUp component for login*/}
       
 
       <Routes>
@@ -23,7 +23,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />  {/* SignIn component for login */}
           <Route path="/signup" element={<SignUp />} />  {/* SignIn component for login */}
         </Routes>
-        <AuthDetails/>
+        <AuthDetails/> {/* AuthDetails component for login */}
       </div>
     </div>
     </Router>
