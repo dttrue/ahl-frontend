@@ -16,6 +16,14 @@ if (password.length < 8) {
   return; // Prevent sign-up if password is invalid
 }
 
+  // Password complexity validation (letters and numbers)
+  const hasLetters = /[a-zA-Z]/.test(password);
+  const hasNumbers = /[0-9]/.test(password);
+  if (!hasLetters || !hasNumbers) {
+    setPasswordError("Password must contain a mix of letters and numbers.");
+    return;
+  }
+
 createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
   console.log(userCredential);
