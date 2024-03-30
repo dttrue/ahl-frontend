@@ -16,12 +16,13 @@ if (password.length < 8) {
   return; // Prevent sign-up if password is invalid
 }
 
-  // Password complexity validation (letters and numbers)
+  // Password complexity validation (uppercase, lowercase, numbers, and special characters)
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
   const hasNumbers = /[0-9]/.test(password);
-  if (!hasUppercase || !hasLowercase || !hasNumbers) {
-    setPasswordError("Password must contain a mix of uppercase, lowercase letters, and numbers.");
+  const hasSpecialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+  if (!hasUppercase || !hasLowercase || !hasNumbers || !hasSpecialChars ) {
+    setPasswordError("Password must contain a mix of uppercase, lowercase letters, numbers, and special characters.");
     return;
   }
 
