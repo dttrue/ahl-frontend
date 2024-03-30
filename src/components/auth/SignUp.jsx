@@ -17,10 +17,11 @@ if (password.length < 8) {
 }
 
   // Password complexity validation (letters and numbers)
-  const hasLetters = /[a-zA-Z]/.test(password);
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
   const hasNumbers = /[0-9]/.test(password);
-  if (!hasLetters || !hasNumbers) {
-    setPasswordError("Password must contain a mix of letters and numbers.");
+  if (!hasUppercase || !hasLowercase || !hasNumbers) {
+    setPasswordError("Password must contain a mix of uppercase, lowercase letters, and numbers.");
     return;
   }
 
