@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+  }
+  
+  .homepage__header {
+    flex: 1; 
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .homepage__body {
+    flex: 9; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../images/background.webp'); 
+    background-size: cover; 
+    background-position: center; 
+  }
+  
+  .homepage__title {
+    font-weight: bolder;
+    text-align: center;
+    color: #006AFF;
+    font-size: 40px;
+    margin-top: 200px;
+    font-family: Georgia, 'Times New Roman', Times, serif
+  }
+  
+  
+  .search__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .search__bar {
+    border: none;
+    padding: 10px 40px 10px 20px; 
+    border-radius: 4px;
+    width: 600px; 
+    height: 55px;
+    font-size: 18px;
+  }
+  
+  .search__icon {
+    position: absolute;
+    right: 20px;
+    color: blue; 
+  }
+    
+  
+  .ahs__locator {
+    font-weight: bold; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #006AFF;
+    font-size: 25px;
+    margin-right: auto;
+    margin-left: 356px;
+    
+  }
+  
+  
+  .sign-in__link {
+    text-decoration: none; 
+    color: black; 
+    font-size: 18px;
+  }
+  
+  .sign-in__link:hover, .link:hover {
+    color: #006AFF; 
+  }
+  
+  
+  
+  .link {
+    text-decoration: none; 
+    color: black; 
+    font-size: 18px;
+    margin-right: 30px; 
+  }
+  
+  .link1{
+    margin-left: 30px;
+  }
+  
+  span {
+    cursor: pointer 
+  }
+  

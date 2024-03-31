@@ -1,0 +1,38 @@
+.container header {
+  background-color: #fff;
+  padding: 10px 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.container .header-right {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.body {
+  flex: 6; 
+}
+
+  
+.search__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.search__bar {
+  padding: 10px 40px 10px 20px; 
+  border-radius: 4px;
+  width:300px; 
+  height: 3px;
+  font-size: 18px;
+ border-color: black;
+}
