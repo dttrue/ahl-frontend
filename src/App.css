@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('../images/background.webp'); 
+  /* background-image: url('../images/background.webp');  */
   background-size: cover; 
   background-position: center; 
 }
