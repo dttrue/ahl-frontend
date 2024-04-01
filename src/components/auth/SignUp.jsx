@@ -26,6 +26,9 @@ const SignUp = () => {
     if (!hasUppercase) {
       missingRequirements.push("uppercase letter");
     }
+    if (!hasLowercase) {
+      missingRequirements.push("lowercase letter");
+    }
 
     //error message based on missing requirements
     let errorMessage = "";
