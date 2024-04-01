@@ -32,6 +32,9 @@ const SignUp = () => {
     if (!hasNumbers) {
       missingRequirements.push("number");
     }
+    if (!hasSpecialChars) {
+      missingRequirements.push("special character");
+    }
 
     //error message based on missing requirements
     let errorMessage = "";
