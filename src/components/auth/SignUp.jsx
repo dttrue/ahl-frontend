@@ -40,13 +40,13 @@ const SignUp = () => {
     let errorMessage = "";
     if (missingRequirements.length === 1) {
       errorMessage = `Password must contain at least one ${missingRequirements[0]}.`;
-      // } else if (missingRequirements.length > 1) {
-      //   const requirementsList = missingRequirements.join(", ");
-      //   errorMessage = `Password must contain a mix of ${requirementsList}.`;
-      // }
+      } else if (missingRequirements.length > 1) {
+        const requirementsList = missingRequirements.join(", ");
+        errorMessage = `Password must contain a mix of ${requirementsList}.`;
+      }
 
       return errorMessage;
-    }
+    
   };
 
   const signUp = (e) => {
