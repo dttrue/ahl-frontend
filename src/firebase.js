@@ -2,13 +2,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+const firebaseKey = process.env.REACT_APP_API_KEY;
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+console.log(process.env)
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDV3GrQJR7uIv3GfTaWEaAgxPV_1D49Zv4",
+  apiKey: firebaseKey,
   authDomain: "ahl-app.firebaseapp.com",
   projectId: "ahl-app",
   storageBucket: "ahl-app.appspot.com",
