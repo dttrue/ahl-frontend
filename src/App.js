@@ -11,7 +11,7 @@ function App() {
       <div className="container">
         <header className="homepage__header" >
           <h1>Header</h1>
-          <span className="wishlist-text">Wishlist</span>
+          <Link to="/wishlist" className="wishlist-text">Wishlist</Link>
         </header>
         <div className="homepage__body">
           <h1 className="homepage__title">Affordable Homes</h1>
