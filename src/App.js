@@ -9,8 +9,9 @@ function App() {
   return (
     <Router>
       <div className="container">
-        <header className="homepage__header">
+        <header className="homepage__header" >
           <h1>Header</h1>
+          <span className="wishlist-text">Wishlist</span>
         </header>
         <div className="homepage__body">
           <h1 className="homepage__title">Affordable Homes</h1>
