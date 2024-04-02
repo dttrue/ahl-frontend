@@ -22,6 +22,7 @@ function HousingProject() {
         const responseTwo = await axios.get(
           "https://data.cityofnewyork.us/resource/9ay9-xkek.json"
         );
+        
         const rentalsByBuildingId = {};
         for (let listing of responseTwo.data) {
           if (!rentalsByBuildingId[listing.buildingid]) {
@@ -53,6 +54,17 @@ function HousingProject() {
   if (loading) return <div>Loading...</div>; // Display loading message while fetching
   if (error) return <div>{error}</div>; // Display error message if any error occurred
 
+const getListingRent = (rentInfo) => {
+  if (rentInfo.lowrent){
+     return `$${rentInfo.lowrent}`
+    } else if(rentInfo.medianrent ) {
+      return `$${rentInfo.medianrent}`
+    } else if(rentInfo.highrent){
+      return `$${rentInfo.highrent}`
+    } else {return "N/A"}
+        
+}
+
   // Render the list of projects as cards
   return (
     <div className="housing-projects">
@@ -61,11 +73,14 @@ function HousingProject() {
         <div
           key={project.building_id || index}
           className="card mb-3"
-          style={{ maxWidth: "400px", margin: "15px auto" }}
+          style={{ maxWidth: "500px", margin: "15px auto" }}
         >
           <div className="card-body">
             <h5 className="card-title">{project.project_name}</h5>
             <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+                Project ID: {project.building_id}
+              </li>
               <li className="list-group-item">
                 House Number: {project.house_number}
               </li>
@@ -116,9 +131,7 @@ function HousingProject() {
                 <li> Bedroom Size: {rentInfo.bedroomsize}</li>
                 <li> Max Income: {rentInfo.maxIncome}</li>
                 <li>Total Units: {rentInfo.totalUnits}</li>
-                <li>Low Rent: {rentInfo.lowrent}</li>
-                <li>Median Rent: {rentInfo.medianrent}</li>
-                <li>High Rent: {rentInfo.highrent}</li>
+                <li>{getListingRent(rentInfo)} </li>
               </ul>
             ))}
         </div>

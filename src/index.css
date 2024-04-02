@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.rental-listings {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding: 15px
+}
+
