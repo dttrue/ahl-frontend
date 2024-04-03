@@ -1,10 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-function HousingNameList() {
-  const [apartmentNames, setApartmentNames] = useState([]);
+function HousingNameList({onSubmit}) {
+  const [apartmentBorough, setApartmentBorough] = useState('');
 
- 
-  async function handleClick(event) {
+  function handleInputChange(event) {
+    setApartmentBorough(event.target.value)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    onSubmit(apartmentBorough) 
+  }
+  function handleClick(event) {
     const inputValue = event.target.value;
 const cacheBuster = new Date().getTime(); 
 fetch(`https://data.cityofnewyork.us/resource/hg8x-zxpr.json?borough=${inputValue}&_=${cacheBuster}`)
