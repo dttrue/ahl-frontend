@@ -84,9 +84,9 @@ function Homepage() {
         setSignInModalIsOpen(false)
       };
     
-      const closeCreateAccountModal = () => {
-        setCreateAccountModalIsOpen(false);
-      };
+    const closeCreateAccountModal = () => {
+      setCreateAccountModalIsOpen(false);
+    };
 
 
   return (

@@ -14,20 +14,15 @@ function App() {
           <h1>Header</h1>
           <Link to="/wishlist" className="wishlist-text">Wishlist</Link>
         </header>
-        <div className="homepage__body">
-          <h1 className="homepage__title">Affordable Homes</h1>
-          <input
-            type="text"
-            className="search__bar"
-            placeholder="Enter a neighborhood or ZIP code"
-          />
+        
+          
           <Link to="/signin">Sign In</Link>{" "}
           {/* Link to SignIn component for login*/}
           <Link to="/signup">Create Account</Link>{" "}
           {/* Link to SignUp component for login*/}
           <Routes>
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/" element={<Homepage/>} />{" "}
+            <Route path="/" element={<div>Home Page Content</div>} />{" "}
             {/* Replace with your homepage content */}
             <Route path="/signin" element={<SignInModal />} />{" "}
             {/* SignIn component for login */}

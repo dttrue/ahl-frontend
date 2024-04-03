@@ -7,9 +7,9 @@ const fetchData = async (input, inputType) => {
   if (inputType === "postcode") {
     url = `${baseUrl}?postcode=${encodeURIComponent(input)}`;
   } else {
-    url = `${baseUrl}?borough=${encodeURIComponent(input.toUpperCase())}`;
+    url = `${baseUrl}?borough=${encodeURIComponent(input)}`;
   }
-
+console.log(url)
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch data");
@@ -20,3 +20,5 @@ const fetchData = async (input, inputType) => {
     return { data: null, error: error.message };
   }
 };
+
+export default fetchData;
