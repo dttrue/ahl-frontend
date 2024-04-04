@@ -8,20 +8,21 @@ import CreateAccountModal from '../CreateAccount/createAccount__Modal';
 
 
 function Homepage() {
-    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [signInModalIsOpen, setSignInModalIsOpen] = useState(false)
     const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
 
     const openSignInModal = () => {
-        setModalIsOpen(true);
+      setSignInModalIsOpen(true);
         setCreateAccountModalIsOpen(false)
       };
     
       const closeSignInModal = () => {
-        setModalIsOpen(false);
+        setSignInModalIsOpen(false);
       };
     
       const openCreateAccountModal = () => {
         setCreateAccountModalIsOpen(true);
+        setSignInModalIsOpen(false)
       };
     
       const closeCreateAccountModal = () => {
@@ -48,7 +49,7 @@ function Homepage() {
       </div>
       </div>
       {createAccountModalIsOpen && <CreateAccountModal onClose={closeCreateAccountModal} openSignIn={openSignInModal} />}
-      {modalIsOpen && <SignInModal isOpen={modalIsOpen} onClose={closeSignInModal} openCreateAccount={openCreateAccountModal}/>}
+      {signInModalIsOpen && <SignInModal isOpen={signInModalIsOpen} onClose={closeSignInModal} openCreateAccount={openCreateAccountModal}/>}
     </div>
    
   );

@@ -1,5 +1,5 @@
 .container header {
-  background-color: #fff;
+  background-color: white;
   padding: 10px 20px;
   flex: 1;
   display: flex;
@@ -28,11 +28,11 @@
 }
 
 
-.search__bar {
+.profile-search__bar {
   padding: 10px 40px 10px 20px; 
   border-radius: 4px;
-  width:3000000px; 
-  height: 3000px;
+  width:30px; 
+  height: 30px;
   font-size: 18px;
  border-color: black;
 }

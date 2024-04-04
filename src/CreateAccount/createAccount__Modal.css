@@ -101,3 +101,10 @@
     background-color: rgba(195, 189, 189, 0.3);
     transition: background-color 0.3s ease;
     }
+
+
+    .password-error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
