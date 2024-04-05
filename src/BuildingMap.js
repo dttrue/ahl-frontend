@@ -36,7 +36,7 @@ const BuildingMap = ({ building, apikey }) => {
   }, [apikey, building]); // Dependencies
    // Depend on the building prop to re-initialize when it changes
 
-    return <div ref={mapRef} style={{ height: '250px', width: '100%' }} />;
+    return <div ref={mapRef} className="map"  />;
 };
 
 export default BuildingMap;
