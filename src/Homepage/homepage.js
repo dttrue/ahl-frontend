@@ -123,3 +123,10 @@ function Homepage() {
 
 
 export default Homepage;
+/* 
+entering information on the form(Line 78) and clicking submit "Search for Apartments" will fetch API and generate data based
+on what info was entered. API fetch function is in another file called housinginfoAPIfetch
+
+clicking search for apartments should navigate to a newpage "HousingList.js" that displays all the data, but currently does not.
+
+*/

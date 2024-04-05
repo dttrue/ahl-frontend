@@ -36,4 +36,17 @@ function App() {
   );
 }
 
+/* 
+App.js is a file for setting up routes and links to each individual component on the homepage. the problem is the route for ApartmentNameList
+
+entering information on the form(Line 78) in the "Homepage.js" file and clicking submit "Search for Apartments" will fetch API and generate data based
+on what info was entered. API fetch function is in another file called housinginfoAPIfetch
+
+clicking search for apartments should navigate to a newpage "HousingList.js" that displays all the data, but currently does not.
+
+in "HousingList.js" this code takes our search results and maps through the data displaying each apartment by its name. we passed searchResult
+as a prop to this function to use it
+*/
+
+
 export default App;
