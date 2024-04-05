@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import HousingDetails from './HousingDetials';
+
+import HousingDetails from './HousingDetails';
 
 
 
