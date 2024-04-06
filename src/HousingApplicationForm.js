@@ -97,54 +97,61 @@ const HousingApplicationForm = () => {
     <form onSubmit={submitFormData}>
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name" value={personalInfo.name} onChange={handlePersonalInfoChange} />
+                <input type="text" className="form-control" id="nameInput" name="name" placeholder="Name" value={personalInfo.name} onChange={handlePersonalInfoChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="ageInput" name="age" placeholder="Age" value={personalInfo.age} onChange={handlePersonalInfoChange} />
+                <input type="text" className="form-control" id="ageInput" name="age" placeholder="Age" value={personalInfo.age} onChange={handlePersonalInfoChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="emailInput" name="email" placeholder="Email" value={personalInfo.email} onChange={handlePersonalInfoChange} />
+                <input type="text" className="form-control" id="emailInput" name="email" placeholder="Email" value={personalInfo.email} onChange={handlePersonalInfoChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="phoneInput" name="phone" placeholder="Phone" value={personalInfo.phone} onChange={handlePersonalInfoChange} />
+                <input type="text" className="form-control" id="phoneInput" name="phone" placeholder="Phone" value={personalInfo.phone} onChange={handlePersonalInfoChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
-            <div class="form-group w-50">
+            <div className="form-group w-50">
                 <input type="text" class="form-control" id="annualIncomeInput" name="annualIncome" placeholder="Annual Income" value={incomeDetails.annualIncome} onChange={handleIncomeDetailsChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="sourceOfIncomeInput" name="sourceOfIncome" placeholder="Source of Income" value={incomeDetails.sourceOfIncome} onChange={handleIncomeDetailsChange} />
+                <input type="text" className="form-control" id="sourceOfIncomeInput" name="sourceOfIncome" placeholder="Source of Income" value={incomeDetails.sourceOfIncome} onChange={handleIncomeDetailsChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="preferredLocationInput" name="preferredLocation" placeholder="Preferred Location" value={housingPreferences.preferredLocation} onChange={handleHousingPreferencesChange} />
+                <select className="form-control" id="numberOfBedroomsInput" name="numberOfBedrooms" placeholder="Number of Bedrooms" value={housingPreferences.numberOfBedrooms} onChange={handleHousingPreferencesChange} >
+                  <option value="">Select Preferred Location</option>
+                  <option value="Brooklyn">Brooklyn</option>
+                  <option value="Manhattan">Manhattan</option>
+                  <option value="Queens">Queens</option>
+                  <option value="Staten Island">Staten Island</option>
+                  <option value="Bronx">Bronx</option>
+                </select>
             </div>
         </div>
         
         <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
-                <input type="text" class="form-control" id="numberOfBedroomsInput" name="numberOfBedrooms" placeholder="Number of Bedrooms" value={housingPreferences.numberOfBedrooms} onChange={handleHousingPreferencesChange} />
+                <input type="text" className="form-control" id="numberOfBedroomsInput" name="numberOfBedrooms" placeholder="Number of Bedrooms" value={housingPreferences.numberOfBedrooms} onChange={handleHousingPreferencesChange} />
             </div>
         </div>
         
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </div>
     </form>
 </div>
