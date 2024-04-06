@@ -1,22 +1,46 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 function HousingNameList() {
   const [apartmentNames, setApartmentNames] = useState([]);
 
-  function handleClick(event) {
+ 
+  async function handleClick(event) {
     const inputValue = event.target.value;
+const cacheBuster = new Date().getTime(); 
+fetch(`https://data.cityofnewyork.us/resource/hg8x-zxpr.json?borough=${inputValue}&_=${cacheBuster}`)
+  .then(response => response.json())
+  .then(data => {
+ 
+    const names = data.map(item => item.project_name);
+    setApartmentNames(names);
+  })
+  .catch(error => {
+    console.error('Error fetching apartment names:', error);
+    setApartmentNames([]);
+  });
 
-    fetch(
-      `https://data.cityofnewyork.us/resource/hg8x-zxpr.json?borough=${inputValue}`
-    )
-      .then((response) => {})
-      .catch((error) => {});
   }
+  
 
+ 
+  return (
+    <div>
+      <button value="Manhattan" onClick={handleClick}>Get Manhattan Apartments</button>
+      <button value="Brooklyn" onClick={handleClick}>Get Brooklyn Apartments</button>
+      <button value="Queens" onClick={handleClick}>Get Queens Apartments</button>
+      <button value="Staten Island" onClick={handleClick}>Get Staten Island Apartments</button> 
+      <button value="Bronx" onClick={handleClick}>Get Bronx Apartments</button>
 
+      <ul>
+        {apartmentNames.length > 0 ? (
+          apartmentNames.map((name, index) => <li key={index}>{name}</li>)
+        ) : (
+          <li>No apartments found</li>
+        )}
+      </ul>
+    </div>
+  );
 }
 
-
-
 export default HousingNameList;
+
