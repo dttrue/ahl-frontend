@@ -1,19 +1,21 @@
-import './homepage.css';
-import {FaSearch} from 'react-icons/fa'
-import React, { useState } from 'react';
-import SignInModal from '../Signin/signin__Modal';
-import CreateAccountModal from '../CreateAccount/createAccount__Modal';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import "./homepage.css";
+import { FaSearch } from "react-icons/fa";
+import React, { useState } from "react";
+import SignInModal from "../Signin/signin__Modal";
+import CreateAccountModal from "../CreateAccount/createAccount__Modal";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Homepage() {
   const [input, setInput] = useState("");
   const [inputType, setInputType] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [createAccountModalIsOpen, setCreateAccountModalIsOpen] =
+    useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
 
   const fetchData = (input, inputType) => {
     const baseUrl = "https://data.cityofnewyork.us/resource/hg8x-zxpr.json";
@@ -117,10 +119,8 @@ function Homepage() {
       {createAccountModalIsOpen && <CreateAccountModal onClose={closeCreateAccountModal} openSignIn={openSignInModal} />}
       {signInModalIsOpen && <SignInModal isOpen={signInModalIsOpen} onClose={closeSignInModal} openCreateAccount={openCreateAccountModal}/>}
     </div>
-   
   );
 }
-
 
 export default Homepage;
 /* 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, RouterProvider, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import React, {useState} from 'react'
 import { useLocation } from "react-router-dom"
 
@@ -7,19 +7,13 @@ function ApartmentNameList () {
 const location = useLocation()
     const {searchResult} = location.state || { searchResult: [] }
 
-const uniqueBuildingNames = Array.from(
-    new Set(
-        searchResult
-        .filter(result => result.project_name.toLowerCase() !== "confidential")
-        .map(result => result.project_name)
-    )
-)
-
  return (
     <ul>
-      {uniqueBuildingNames.map((projectName, index) => (
+      {searchResult
+        .filter(result => result.project_name.toLowerCase() !== "confidential")
+        .map((result, index) => (
         <li key={index}>
-          <h3>{projectName}</h3>
+          <h3><Link to={`/housingList/${result.building_id}`}>{result.project_name}</Link></h3>
         </li>
       ))}
     </ul>

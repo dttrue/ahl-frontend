@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import ApartmentNameList from './HousingList'
 
-
-function HousingProject() {
+function HousingDetails() {
   // State for storing the list of projects
-  const [projectData, setProjectData] = useState([]);
-  const [projectRentInfo, setProjectRentInfo] = useState({});
+  const { building_id } = useParams
+  console.log("Building ID:", building_id)
+
+  const [projectDetails, setProjectDetails] = useState(null);
+  const [projectRentInfo, setProjectRentInfo] = useState([]);
   // State to track the loading status
   const [loading, setLoading] = useState(true);
   // State to store any error messages
@@ -15,32 +19,19 @@ function HousingProject() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        const responseOne = await axios.get(
-          "https://data.cityofnewyork.us/resource/hg8x-zxpr.json"
+        const projDetailsResp = await axios.get(
+          `https://data.cityofnewyork.us/resource/hg8x-zxpr.json?building_id=${building_id}`
+        );
+        const rentDetailsResp = await axios.get(
+          `https://data.cityofnewyork.us/resource/9ay9-xkek.json?buildingid=${building_id}`
         );
 
-        const responseTwo = await axios.get(
-          "https://data.cityofnewyork.us/resource/9ay9-xkek.json"
-        );
-        
-        const rentalsByBuildingId = {};
-        for (let listing of responseTwo.data) {
-          if (!rentalsByBuildingId[listing.buildingid]) {
-            rentalsByBuildingId[listing.buildingid] = [];
-          }
-          rentalsByBuildingId[listing.buildingid].push({
-            bedroomsize: listing.bedroomsize,
-            maxIncome: listing.maxallowableincome,
-            totalUnits: listing.totalunits,
-            lowrent: listing.lowactualrent,
-            medianrent: listing.medianactualrent,
-            highrent: listing.highactualrent,
-          });
+        if (projDetailsResp.data && projDetailsResp.data.length > 0) {
+          setProjectDetails(projDetailsResp.data);
         }
-
-        setProjectData(responseOne.data);
-        setProjectRentInfo(rentalsByBuildingId);
+        if (rentDetailsResp.data) {
+          setProjectRentInfo(rentDetailsResp.data);
+        }
       } catch (error) {
         console.error("Failed to fetch housing data:", error);
         setError("Failed to fetch housing data");
@@ -50,95 +41,41 @@ function HousingProject() {
     };
 
     fetchData();
-  }, []);
-  debugger;
-  if (loading) return <div>Loading...</div>; // Display loading message while fetching
-  if (error) return <div>{error}</div>; // Display error message if any error occurred
+  }, [building_id]);
 
-const getListingRent = (rentInfo) => {
-  if (rentInfo.lowrent){
-     return `$${rentInfo.lowrent}`
-    } else if(rentInfo.medianrent ) {
-      return `$${rentInfo.medianrent}`
-    } else if(rentInfo.highrent){
-      return `$${rentInfo.highrent}`
-    } else {return "N/A"}
-        
-}
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+  if (!projectDetails) return <div> No details available</div>;
 
-  // Render the list of projects as cards
   return (
     <div className="housing-projects">
-      <h1>Housing List</h1>
-      {projectData.map((project, index) => (
-        <div
-          key={project.building_id || index}
-          className="card mb-3"
-          style={{ maxWidth: "500px", margin: "15px auto" }}
-        >
-          <div className="card-body">
-            <h5 className="card-title">{project.project_name}</h5>
-            <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-                Project ID: {project.building_id}
+      <h1>{projectDetails.project_name}</h1>
+      {/* Display project details */}
+      <div>
+        <p>House Number: {projectDetails.house_number}</p>
+        <p>Street Name: {projectDetails.street_name}</p>
+        <p>Borough: {projectDetails.borough}</p>
+        <p>Postcode: {projectDetails.postcode}</p>
+        {/* Add more details as needed */}
+      </div>
+      {/* Display rent information */}
+      <div>
+        <h2>Rent Details:</h2>
+        {projectRentInfo.length > 0 ? (
+          <ul>
+            {projectRentInfo.map((info, index) => (
+              <li key={index}>
+                Bedroom Size: {info.bedroomsize}, Rent: $
+                {info.lowrent || info.medianrent || info.highrent || "N/A"}
               </li>
-              <li className="list-group-item">
-                House Number: {project.house_number}
-              </li>
-              <li className="list-group-item">
-                Street Name: {project.street_name}
-              </li>
-              <li className="list-group-item">Borough: {project.borough}</li>
-              <li className="list-group-item">Postcode: {project.postcode}</li>
-          
-              <li className="list-group-item">
-                Extremely Low Income Units: {project.extremely_low_income_units}
-              </li>
-              <li className="list-group-item">
-                Very Low Income Units: {project.very_low_income_units}
-              </li>
-              <li className="list-group-item">
-                Low Income Units: {project.low_income_units}
-              </li>
-              <li className="list-group-item">
-                Moderate Income Units: {project.moderate_income_units}
-              </li>
-              <li className="list-group-item">
-                Middle Income Units: {project.middle_income_units}
-              </li>
-              <li className="list-group-item">
-                Other Income Units: {project.other_income_units}
-              </li>
-              <li className="list-group-item">
-                Studio Units: {project.studio_units}
-              </li>
-              <li className="list-group-item">
-                1 Bedroom Units: {project._1_br_units}
-              </li>
-              <li className="list-group-item">
-                2 Bedroom Units: {project._2_br_units}
-              </li>
-              <li className="list-group-item">
-                3 Bedroom Units: {project._3_br_units}
-              </li>
-              <li className="list-group-item">
-                4 Bedroom Units: {project._4_br_units}
-              </li>
-            </ul>
-          </div>
-          {projectRentInfo[project.buildingid] &&
-            projectRentInfo[project.buildingid].map((rentInfo, rentIndex) => (
-              <ul key={rentIndex} className="rental-listings" >
-                <li> Bedroom Size: {rentInfo.bedroomsize}</li>
-                <li> Max Income: {rentInfo.maxIncome}</li>
-                <li>Total Units: {rentInfo.totalUnits}</li>
-                <li>{getListingRent(rentInfo)} </li>
-              </ul>
             ))}
-        </div>
-      ))}
+          </ul>
+        ) : (
+          <p>No rent information available.</p>
+        )}
+      </div>
     </div>
   );
 }
 
-export default HousingProject;
+export default HousingDetails;
