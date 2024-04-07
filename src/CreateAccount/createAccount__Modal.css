@@ -66,17 +66,17 @@
     background-color: #0056b3;
   }
 
-  .create-account__link, .signin-btn__link{
+  .create-account-link, .signin-btn-link{
    font-weight: bold;
   }
 
 
-  .create-account__link:hover, .signin-btn__link:hover {
+  .create-account-link:hover, .signin-btn-link:hover {
     text-decoration: underline;
     color: #0056b3;
   }
 
-  .password__validation {
+  .password-validation {
     font-size: x-small;
     text-align: left;
   }

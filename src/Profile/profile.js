@@ -1,27 +1,34 @@
 import './profile.css';
 import { MdAccountCircle } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
-// import MenuSimple from './profileDropdown';
+import { useState } from 'react';
+import DropDownProfile from './profileDropdown';
+
 
 function ProfilePage() {
-  
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    
+
+
+
     return (
-        <div className="container">
+        <div className="profile-container">
             <header>
-                    <div className="ahs__locator">AHS Locator</div>
-                    <div className='search__container'>
-                        <input type="text" className="profile-search__bar" placeholder="Enter a neighborhood or ZIP code" />
-                        <FaSearch size={20} className="search__icon" />
-                    </div>
-                    <div className='header-right'>
-                    <span className="link">Help</span>
-                    <span>
-                    <MdAccountCircle size={24} />
-                    </span>
-                    </div>
+                <div className="profile-ahs-locator">AHS Locator</div>
+                <div className='profile-search-container'>
+                    <input type="text" className="profile-search-bar" placeholder="Enter a neighborhood or ZIP code" />
+                    <FaSearch size={18} className="profile-search-icon" />
+                </div>
+                <span className="link">Help</span>
+                <span onClick={() => setShowDropdown(!showDropdown)}>
+                    <MdAccountCircle size={33} />
+                </span>
+                {showDropdown && <DropDownProfile />}
+
             </header>
             <div className="body">
-                {/* <MenuSimple /> */}
+                {/* get api */}
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 
-function CreateAccountModal({onClose, openSignIn}) {
+function CreateAccountModal({ onClose, openSignIn }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(""); //checks for state of password error
@@ -44,23 +44,23 @@ function CreateAccountModal({onClose, openSignIn}) {
     let errorMessage = "";
     if (missingRequirements.length === 1) {
       errorMessage = `Password must contain at least one ${missingRequirements[0]}.`;
-      } else if (missingRequirements.length > 1) {
-        const requirementsList = missingRequirements.join(", ");
-        errorMessage = `Password must contain a mix of ${requirementsList}.`;
-      }
+    } else if (missingRequirements.length > 1) {
+      const requirementsList = missingRequirements.join(", ");
+      errorMessage = `Password must contain a mix of ${requirementsList}.`;
+    }
 
-      return errorMessage;
-    
+    return errorMessage;
+
   };
 
   const signUp = (e) => {
     e.preventDefault();
 
- // Ensure password is not an empty string
- if (!password) {
-  setPasswordError("Password cannot be empty.");
-  return;
-}
+    // Ensure password is not an empty string
+    if (!password) {
+      setPasswordError("Password cannot be empty.");
+      return;
+    }
 
     const errorMessage = validatePassword(password);
 
@@ -96,36 +96,36 @@ function CreateAccountModal({onClose, openSignIn}) {
 
   // }
 
-  
+
 
   return (
-    <div className= 'custom-modal open'>
+    <div className='custom-modal open'>
       <div className="modal-content">
         <div className="modal-header">
           <h2 className="modal-welcome">Welcome to AHS Locator</h2>
           <button className="close-button" onClick={onClose}>x</button>
         </div>
-            <form onSubmit={signUp}>
+        <form onSubmit={signUp}>
           <div>
             <label>Email</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div>
             <label>Password</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
-          <div className='password__validation'>
-          <p>At least 8 characters</p>
-          <p>Mix of letters and numbers</p>
-          <p>At least 1 special character</p>
-          <p>At least 1 lowercase letter and 1 uppercase letter</p>
+          <div className='password-validation'>
+            <p>At least 8 characters</p>
+            <p>Mix of letters and numbers</p>
+            <p>At least 1 special character</p>
+            <p>At least 1 lowercase letter and 1 uppercase letter</p>
           </div>
           {/* <Link to='/profile'> */}
           <button type="submit" >Submit</button>
           {/* </Link> */}
           {passwordError && <p className="password-error">{passwordError}</p>}{" "}
-        {/*display error message if needed */}
-          <p>Already have an account? <span onClick={openSignIn} className='signin-btn__link'>Sign in.</span></p>
+          {/*display error message if needed */}
+          <p>Already have an account? <span onClick={openSignIn} className='signin-btn-link'>Sign in.</span></p>
         </form>
       </div>
 

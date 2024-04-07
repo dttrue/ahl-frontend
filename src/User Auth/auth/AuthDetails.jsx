@@ -1,8 +1,19 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import './AuthDetails.css'
+// import { useNavigate } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 import auth from "../../firebase";
+
+
+export const userSignOut = () => {
+  return signOut(auth)
+    .then(() => {
+      console.log("Sign out successful");
+    })
+    .catch((error) => console.log(error));
+};
+
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
@@ -23,13 +34,6 @@ const AuthDetails = () => {
     };
   }, []); //comes in effect when the user signs in or out
 
-  const userSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("sign out successful");
-      })
-      .catch((error) => console.log(error));
-  }; //signs out the usery
 
 
   const closeErrorPopup = () => {
@@ -43,13 +47,10 @@ const AuthDetails = () => {
       <div className="popup">
         <div className="popup-content">
         <p>{`Signed In as ${authUser.email}`}</p>
-        {/* <button onClick={userSignOut}>Sign Out</button> */}
         <button className="error-close-button" onClick={closeErrorPopup}>x</button>
       </div>
       </div>
-    ) : (
-      <p>Signed Out</p>
-    )}
+    ) : null}
   </div>
   )
 };
