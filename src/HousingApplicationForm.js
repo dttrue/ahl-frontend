@@ -131,7 +131,7 @@ const HousingApplicationForm = () => {
             </div>
         </div>
         
-        <div class="d-flex justify-content-center mb-3">
+       <div class="d-flex justify-content-center mb-3">
             <div class="form-group w-50">
                 <select className="form-control" id="numberOfBedroomsInput" name="numberOfBedrooms" placeholder="Number of Bedrooms" value={housingPreferences.numberOfBedrooms} onChange={handleHousingPreferencesChange} >
                   <option value="">Select Preferred Location</option>
