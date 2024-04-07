@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import ApartmentNameList from './HousingList'
+import ApartmentNameList from "./apartmentNameList";
 
 function HousingDetails() {
   // State for storing the list of projects
