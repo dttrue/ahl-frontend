@@ -3,11 +3,70 @@ import {FaSearch} from 'react-icons/fa'
 import React, { useState } from 'react';
 import SignInModal from '../Signin/signin__Modal';
 import CreateAccountModal from '../CreateAccount/createAccount__Modal';
-
-
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Homepage() {
+  const [input, setInput] = useState("");
+  const [inputType, setInputType] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+
+  const fetchData = (input, inputType) => {
+    const baseUrl = "https://data.cityofnewyork.us/resource/hg8x-zxpr.json";
+    let url = "";
+
+    if (inputType === "postcode") {
+      url = `${baseUrl}?postcode=${encodeURIComponent(input)}`;
+    } else {
+      url = `${baseUrl}?borough=${encodeURIComponent(input)}`;
+    }
+
+    return axios
+      .get(url)
+      .then((response) => {
+        return { data: response.data, error: null };
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error.message);
+        return { data: null, error: error.message };
+      });
+  };
+
+  const handleSubmit = async () => {
+    const searchTest = search; // Access search state directly
+    console.log(searchTest);
+    const zip = /^[0-9]{5}$/.test(searchTest);
+    fetchData(searchTest, zip ? "postcode" : "borough").then(
+      ({ data, error }) => {
+        if (error) {
+          setError(error);
+          setSearchResult(null);
+        } else {
+          console.log(data);
+          setSearchResult(data);
+          navigate("/housingList", { state: { searchResult: data } });
+          setError("");
+        }
+      }
+    );
+  };
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+  console.log(searchResult);
+
+
     const [signInModalIsOpen, setSignInModalIsOpen] = useState(false)
     const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
 
@@ -29,6 +88,7 @@ function Homepage() {
         setCreateAccountModalIsOpen(false);
       };
 
+
   return (
     <div className="container">
       <header className="homepage-header">
@@ -44,8 +104,14 @@ function Homepage() {
       <div className="homepage-body">
       <h1 className='homepage-title'>Affordable Homes.</h1> 
       <div className='search-container'>
-      <input type="text" className="search-bar" placeholder="Enter a neighborhood or ZIP code" />
-      <FaSearch size={20} className="search-icon" />
+      <input 
+      type="text" 
+      className="search-bar" 
+      placeholder="Enter a borough or ZIP code" 
+      value={search}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}/>
+      <FaSearch size={20} className="search-icon" onClick={handleSubmit} />
       </div>
       </div>
       {createAccountModalIsOpen && <CreateAccountModal onClose={closeCreateAccountModal} openSignIn={openSignInModal} />}

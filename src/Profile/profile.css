@@ -43,11 +43,7 @@ header {
 }
 
 
-.link {
-  margin-left: 238px; /* Adjust margin as needed */
-  color: black; 
-  font-size: 18px;
-}
+
 
 .link:hover {
   color: #006AFF; 
