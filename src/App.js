@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import SignIn from "./components/auth/Signin";
-import SignUp from "./components/auth/SignUp";
-import AuthDetails from "./components/auth/AuthDetails";
-import Wishlist from "./components/Wishlist";
+import SignInModal from "./Signin/signin__Modal";
+import CreateAccountModal from "./CreateAccount/createAccount__Modal";
+import Wishlist from "./UserAuth/Wishlist";
+import Homepage from "./Homepage/homepage";
+import ProfilePage from "./Profile/profile";
 
 function App() {
   return (
@@ -26,14 +27,14 @@ function App() {
           {/* Link to SignUp component for login*/}
           <Routes>
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/" element={<div>Home Page Content</div>} />{" "}
+            <Route path="/" element={<Homepage/>} />{" "}
             {/* Replace with your homepage content */}
-            <Route path="/signin" element={<SignIn />} />{" "}
+            <Route path="/signin" element={<SignInModal />} />{" "}
             {/* SignIn component for login */}
-            <Route path="/signup" element={<SignUp />} />{" "}
+            <Route path="/signup" element={<CreateAccountModal />} />{" "}
             {/* SignIn component for login */}
+            <Route path='/profile' element={<ProfilePage/> } />
           </Routes>
-          <AuthDetails /> {/* AuthDetails component for login */}
         </div>
       </div>
     </Router>

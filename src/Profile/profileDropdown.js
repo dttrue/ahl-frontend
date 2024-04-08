@@ -1,7 +1,7 @@
 import React from "react";
 import './profileDropdown.css'
 import { Link } from "react-router-dom";
-import { userSignOut } from "../User Auth/auth/AuthDetails";
+import { userSignOut } from "../UserAuth/auth/AuthDetails";
 
 
 const DropDownProfile = () => {
