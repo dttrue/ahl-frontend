@@ -93,7 +93,7 @@ function ProfilePage() {
 
             </header>
             <div className="body">
-                {/* get api */}
+                {/* get api, display results */}
             </div>
         </div>
     );
