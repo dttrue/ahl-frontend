@@ -12,11 +12,17 @@ function Homepage() {
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [createAccountModalIsOpen, setCreateAccountModalIsOpen] =
-    useState(false);
+  const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
+
+/* fetch data retrieves data from a specific api based on the users input and type of input provided. This specific API gets all listings minus rental information
+so we set it as the base URL. The input type determines how we filter the API fetch based on that API documentation(query parameters). We then use axios.get to
+make a GET request to the specified URL.
+
+If the request is successful, then the .then block gets executed and the data received from the call is put into response as an object and error is set to null.
+The catch error block is for errors that occur during the get request. Error message is logged to the console and data is set to null*/
   const fetchData = (input, inputType) => {
     const baseUrl = "https://data.cityofnewyork.us/resource/hg8x-zxpr.json";
     let url = "";
@@ -48,7 +54,6 @@ function Homepage() {
           setError(error);
           setSearchResult(null);
         } else {
-          console.log(data);
           setSearchResult(data);
           navigate("/housingList", { state: { searchResult: data } });
           setError("");
@@ -57,10 +62,12 @@ function Homepage() {
     );
   };
 
+
+/* handle change updates the search state with a value every time we search something new */
   const handleChange = (event) => {
     setSearch(event.target.value);
   };
-
+/* handleKeydown prevents default form submission if you click enter, therefore improving usability so that we can keep form submission to a button*/
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();

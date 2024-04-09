@@ -30,7 +30,8 @@ function App() {
             {/* SignIn component for login */}
             <Route path='/profile' element={<ProfilePage/> } />
           </Routes>
-        </div>
+          
+        
       </div>
     </Router>
   );
