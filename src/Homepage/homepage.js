@@ -11,8 +11,8 @@ function Homepage() {
   const [inputType, setInputType] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
+  const [signInModalIsOpen, setSignInModalIsOpen] = useState(false)
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ The catch error block is for errors that occur during the get request. Error mes
           setSearchResult(null);
         } else {
           setSearchResult(data);
-          navigate("/housingList", { state: { searchResult: data } });
+          navigate("/apartmentNameList", { state: { searchResult: data } });
           setError("");
         }
       }
@@ -76,8 +76,8 @@ The catch error block is for errors that occur during the get request. Error mes
   console.log(searchResult);
 
 
-    const [signInModalIsOpen, setSignInModalIsOpen] = useState(false)
-    const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
+   
+  
 
     const openSignInModal = () => {
       setSignInModalIsOpen(true);
@@ -113,6 +113,7 @@ The catch error block is for errors that occur during the get request. Error mes
       <div className="homepage-body">
       <h1 className='homepage-title'>Affordable Homes.</h1> 
       <div className='search-container'>
+
       <input 
       type="text" 
       className="search-bar" 
@@ -121,6 +122,8 @@ The catch error block is for errors that occur during the get request. Error mes
       onChange={handleChange}
       onKeyDown={handleKeyDown}/>
       <FaSearch size={20} className="search-icon" onClick={handleSubmit} />
+      
+
       </div>
       </div>
       {createAccountModalIsOpen && <CreateAccountModal onClose={closeCreateAccountModal} openSignIn={openSignInModal} />}
