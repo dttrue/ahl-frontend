@@ -2,14 +2,13 @@ import React, {useState} from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from 'axios'
 
+function ApartmentNameList ({ searchResult }) {
+  searchResult = searchResult || [];
 
-function ApartmentNameList () {
-const location = useLocation()
-    const {searchResult} = location.state || { searchResult: [] }
+  const location = useLocation();
+  const navigate = useNavigate();
 
-
-    const navigate = useNavigate()
-    const handleApartmentClick = async (building_id) => {
+  const handleApartmentClick = async (building_id) => {
       try {
         const projDetailsResp = await axios.get(
           `https://data.cityofnewyork.us/resource/hg8x-zxpr.json?building_id=${building_id}`
@@ -27,7 +26,9 @@ const location = useLocation()
       }
     }
 
- return (
+      // TODO: Show a message if there are no search results
+ 
+      return (
     <ul>
       {searchResult
         .filter(result => result.project_name.toLowerCase() !== "confidential")

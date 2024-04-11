@@ -1,15 +1,14 @@
 import "../css/Homepage.css";
 import { FaSearch } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignInModal from "../auth/SignIn";
 import CreateAccountModal from "../auth/SignUp";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Homepage() {
+function Homepage({ searchResult, setSearchResult }) {
   const [input, setInput] = useState("");
   const [inputType, setInputType] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState("");
   const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
   const [signInModalIsOpen, setSignInModalIsOpen] = useState(false)
@@ -48,19 +47,24 @@ The catch error block is for errors that occur during the get request. Error mes
     const searchTest = search; // Access search state directly
     console.log(searchTest);
     const zip = /^[0-9]{5}$/.test(searchTest);
+    
     fetchData(searchTest, zip ? "postcode" : "borough").then(
       ({ data, error }) => {
         if (error) {
           setError(error);
-          setSearchResult(null);
         } else {
           setSearchResult(data);
-          navigate("/apartmentNameList", { state: { searchResult: data } });
           setError("");
         }
       }
     );
   };
+
+  useEffect(() => {
+    if (searchResult) {
+      navigate("/apartmentNameList");
+    }
+  }, [searchResult]);
 
 
 /* handle change updates the search state with a value every time we search something new */
@@ -73,11 +77,6 @@ The catch error block is for errors that occur during the get request. Error mes
       event.preventDefault();
     }
   };
-  console.log(searchResult);
-
-
-   
-  
 
     const openSignInModal = () => {
       setSignInModalIsOpen(true);
