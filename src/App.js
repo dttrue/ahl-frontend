@@ -8,12 +8,14 @@ import Homepage from "./components/Homepage";
 import ProfilePage from "./components/Profile";
 import ApartmentNameList from "./components/ApartmentNameList";
 import HousingDetails from "./components/HousingDetails"; 
+import { FaSleigh } from "react-icons/fa";
 
 
 function App() {
 
   const [hasCurrentUser, setHasCurrentUser] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
+  const [signInModalOpen, setSignInModalOpen] = useState(true);
 
   return (
     <Router>
@@ -41,7 +43,7 @@ function App() {
             {/* Replace with your homepage content */}
             <Route path="/apartmentNameList" element={<ApartmentNameList searchResult={searchResult} />} />{" "}
             <Route path="/housingDetails" element={<HousingDetails />} />{" "}
-            <Route path="/signin" element={<SignIn/>} />{" "}
+            <Route path="/signin" element={<SignIn isOpen={signInModalOpen} />} />{" "}
             {/* SignIn component for login */}
             <Route path="/signup" element={< CreateAccountModal />} />{" "}
             {/* SignIn component for login */}
