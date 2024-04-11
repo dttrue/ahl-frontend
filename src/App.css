@@ -44,9 +44,10 @@
   margin-bottom: 40px;
   
 }
-.wishlist-text {
+
+/* .wishlist-text {
   position: absolute;
-  top: 50%; /* Vertically center */
-  right: 10px; /* Adjust spacing as needed */
-  transform: translateY(-50%); /* Fine-tune vertical alignment */
-}
+  top: 50%; 
+  right: 10px;
+  transform: translateY(-50%);
+} */

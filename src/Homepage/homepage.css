@@ -7,11 +7,11 @@
   
   .homepage-header {
     flex: 1; 
-    background-color: white;
+    background-color: #DDD;
     color: black;
     display: flex;
     justify-content: space-between;
-
+    padding: 0 20px;
   }
   
   .homepage-body {
