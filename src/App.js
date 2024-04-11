@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import SignInModal from "./Signin/signin__Modal";
@@ -10,19 +11,29 @@ import HousingDetails from "./Housing/housingDetails";
 
 
 function App() {
+
+  const [hasCurrentUser, setHasCurrentUser] = useState(false);
+
   return (
     <Router>
       <div className="container">
-        <header className="homepage-header" >
-          <h1>Header</h1>
-          <Link to="/wishlist" className="wishlist-text">Wishlist</Link>
+        <header className="homepage-header">
+          <Link to="/">
+            <h1>AHL</h1>
+          </Link>
+          {
+            hasCurrentUser ? (
+              <Link to="/wishlist" className="wishlist-text">Wishlist</Link>
+            ) : (
+              <div>
+                {/* Link to SignIn component for login*/}
+                <Link to="/signin">Sign In</Link>{" "}
+                {/* Link to SignUp component for login*/}
+                <Link to="/signup">Create Account</Link>{" "}
+              </div>
+            )
+          }
         </header>
-        
-          
-          <Link to="/signin">Sign In</Link>{" "}
-          {/* Link to SignIn component for login*/}
-          <Link to="/signup">Create Account</Link>{" "}
-          {/* Link to SignUp component for login*/}
           <Routes>
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/" element={<Homepage />} />{" "}
