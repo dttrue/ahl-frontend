@@ -6,7 +6,7 @@ import CreateAccountModal from "../auth/SignUp";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Homepage() {
+function Homepage({ searchResult, setSearchResult }) {
   const [input, setInput] = useState("");
   const [inputType, setInputType] = useState("");
   const [error, setError] = useState("");
@@ -53,7 +53,7 @@ The catch error block is for errors that occur during the get request. Error mes
         if (error) {
           setError(error);
         } else {
-          setSearch(data);
+          setSearchResult(data);
           setError("");
         }
       }
@@ -61,10 +61,10 @@ The catch error block is for errors that occur during the get request. Error mes
   };
 
   useEffect(() => {
-    if (search) {
+    if (searchResult) {
       navigate("/apartmentNameList");
     }
-  }, [search]);
+  }, [searchResult]);
 
 
 /* handle change updates the search state with a value every time we search something new */
