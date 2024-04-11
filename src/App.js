@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import "./App.css";
-import SignInModal from "./Signin/signin__Modal";
-import CreateAccountModal from "./CreateAccount/createAccount__Modal";
-import Wishlist from "./UserAuth/Wishlist";
-import Homepage from "./Homepage/homepage";
-import ProfilePage from "./Profile/profile";
-import ApartmentNameList from "./Housing/apartmentNameList";
-import HousingDetails from "./Housing/housingDetails"; 
+import "../src/css/App.css";
+import SignIn from "./auth/SignIn";
+import CreateAccountModal from "./auth/SignUp";
+import Wishlist from "./components/Wishlist";
+import Homepage from "./components/Homepage";
+import ProfilePage from "./components/Profile";
+import ApartmentNameList from "./components/ApartmentNameList";
+import HousingDetails from "./components/HousingDetails"; 
 
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
             {/* Replace with your homepage content */}
             <Route path="/apartmentNameList" element={<ApartmentNameList searchResult={searchResult} />} />{" "}
             <Route path="/housingDetails" element={<HousingDetails />} />{" "}
-            <Route path="/signin" element={<SignInModal />} />{" "}
+            <Route path="/signin" element={<SignIn/>} />{" "}
             {/* SignIn component for login */}
-            <Route path="/signup" element={<CreateAccountModal />} />{" "}
+            <Route path="/signup" element={< CreateAccountModal />} />{" "}
             {/* SignIn component for login */}
             <Route path='/profile' element={<ProfilePage/> } />
           </Routes>
