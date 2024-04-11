@@ -13,6 +13,7 @@ import HousingDetails from "./Housing/housingDetails";
 function App() {
 
   const [hasCurrentUser, setHasCurrentUser] = useState(false);
+  const [searchResult, setSearchResult] = useState(null);
 
   return (
     <Router>
@@ -36,9 +37,9 @@ function App() {
         </header>
           <Routes>
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/" element={<Homepage />} />{" "}
+            <Route path="/" element={<Homepage searchResult={searchResult} setSearchResult={setSearchResult} />} />{" "}
             {/* Replace with your homepage content */}
-            <Route path="/apartmentNameList" element={<ApartmentNameList />} />{" "}
+            <Route path="/apartmentNameList" element={<ApartmentNameList searchResult={searchResult} />} />{" "}
             <Route path="/housingDetails" element={<HousingDetails />} />{" "}
             <Route path="/signin" element={<SignInModal />} />{" "}
             {/* SignIn component for login */}
