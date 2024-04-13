@@ -23,6 +23,13 @@ function HousingDetails() {
     }
   }, [location]);
 
+  //to let the apartment seeker know that the apartment has been added to the wishlist
+  const handleAddToWishlist = (item) => {
+    addItemToWishlist(item);
+    setItemAdded(true); // Set the state to true when an item is added
+    setTimeout(() => setItemAdded(false), 3000); // Reset the state after 3 seconds
+ };
+
   if (!projectDetails) return <div> No Details available</div>;
   console.log(projectRentInfo);
 
@@ -44,7 +51,7 @@ function HousingDetails() {
         <p>6br: {projectDetails[0]._6_br_units}</p>
         <p>Rental Units: {projectDetails[0].counted_rental_units}</p>
         <p>Total Units: {projectDetails[0].total_units}</p>
-        <button onClick={() => addItemToWishlist(projectDetails[0])}>Add to Wishlist</button>
+        <button onClick={() => handleAddToWishlist(projectDetails[0])}>Add to Wishlist</button>
       </div>
       {/* Display rent information */}
       <div>
@@ -69,6 +76,7 @@ function HousingDetails() {
           <p>No rent information available.</p>
         )}
       </div>
+      {itemAdded && <p>Item added to wishlist!</p>}
     </div>
   );
 }
