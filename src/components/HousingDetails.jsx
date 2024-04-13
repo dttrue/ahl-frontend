@@ -6,6 +6,11 @@ import ApartmentNameList from "./ApartmentNameList";
 function HousingDetails() {
   const [projectDetails, setProjectDetails] = useState(null);
   const [projectRentInfo, setProjectRentInfo] = useState(null);
+  const [wishlistItems, setWishlistItems] = useState([]);
+
+  const addItemToWishlist = (item) => {
+      setWishlistItems([...wishlistItems, item]);
+    };
 
   const location = useLocation();
   useEffect(() => {
@@ -50,9 +55,12 @@ function HousingDetails() {
                   info.medianactualrent ||
                   info.highactualrent ||
                   "N/A"}
+                   <button onClick={() => addItemToWishlist(info)}>Add to Wishlist</button>
               </li>
+
             ))}
           </ul>
+          
         ) : (
           <p>No rent information available.</p>
         )}
