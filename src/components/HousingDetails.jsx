@@ -9,6 +9,7 @@ function HousingDetails() {
   const [projectRentInfo, setProjectRentInfo] = useState(null);
   // const [wishlistItems, setWishlistItems] = useState([]);
   const { addItemToWishlist } = useContext(WishlistContext); //Access the context
+  const [itemAdded, setItemAdded] = useState(false); // State to track if an item has been added
 
   // const addItemToWishlist = (item) => {
   //     setWishlistItems([...wishlistItems, item]);
