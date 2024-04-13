@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { WishlistContext } from './wishlistContext'; //import the context
 
-
+//for simulation purposes
 const apartments = [
   { "name": "Cozy Studio", "image": "studio.jpg", "description": "A charming studio apartment perfect for one person.", "price": "$1300" },
   { "name": "Spacious 1-Bedroom", "image": "one_bedroom.jpg", "description": "A comfortable one-bedroom apartment with ample living space.", "price": "$1400" },
