@@ -3,19 +3,23 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../src/css/App.css";
 import SignIn from "./auth/SignIn";
 import CreateAccountModal from "./auth/SignUp";
+import { AuthProvider } from './authContext/AuthContext';
 import Wishlist from "./components/Wishlist";
 import Homepage from "./components/Homepage";
 import ProfilePage from "./components/Profile";
 import ApartmentNameList from "./components/ApartmentNameList";
 import HousingDetails from "./components/HousingDetails"; 
+import { FaSleigh } from "react-icons/fa";
 
 
 function App() {
 
   const [hasCurrentUser, setHasCurrentUser] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
+  const [signInModalOpen, setSignInModalOpen] = useState(true);
 
   return (
+    <AuthProvider>
     <Router>
       <div className="container">
         <header className="homepage-header">
@@ -41,16 +45,16 @@ function App() {
             {/* Replace with your homepage content */}
             <Route path="/apartmentNameList" element={<ApartmentNameList searchResult={searchResult} />} />{" "}
             <Route path="/housingDetails" element={<HousingDetails />} />{" "}
-            <Route path="/signin" element={<SignIn/>} />{" "}
+            <Route path="/signin" element={<SignIn isOpen={signInModalOpen} />} />{" "}
             {/* SignIn component for login */}
             <Route path="/signup" element={< CreateAccountModal />} />{" "}
             {/* SignIn component for login */}
             <Route path='/profile' element={<ProfilePage/> } />
           </Routes>
-          
-        
+      
       </div>
     </Router>
+     </AuthProvider>
   );
 }
 

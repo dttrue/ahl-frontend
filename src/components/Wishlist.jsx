@@ -1,32 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { WishlistContext } from './wishlistContext'; //import the context
 
-const WishlistItem = ({ name, price }) => {
-    const [isWishlisted, setIsWishlisted] = useState(false);
-  
-    const addToWishlist = () => setIsWishlisted(true);
-    const removeFromWishlist = () => setIsWishlisted(false);
-  
-    return (
-      <div className="wishlist-item">
-        <p>{name} - ${price.toFixed(2)}</p>
-        <div>
-          <button onClick={addToWishlist}>{isWishlisted ? 'Remove From Wishlist' : 'Add to Wishlist'}</button>
-          {isWishlisted && <span className="wishlisted">Wishlisted</span>}
-        </div>
-      </div>
-    );
-  };
+//for simulation purposes
+const apartments = [
+  { "name": "Cozy Studio", "image": "studio.jpg", "description": "A charming studio apartment perfect for one person.", "price": "$1300" },
+  { "name": "Spacious 1-Bedroom", "image": "one_bedroom.jpg", "description": "A comfortable one-bedroom apartment with ample living space.", "price": "$1400" },
+  { "name": "Luxurious 2-Bedroom", "image": "two_bedroom.jpg", "description": "A luxurious two-bedroom apartment perfect for families or roommates.", "price": "$3000" }
+];
+
 
 const Wishlist = () => {
-    const [wishlistItems, setWishlistItems] = useState([]);
+    // const [wishlistItems, setWishlistItems] = useState(apartments);
+    const { wishlistItems } = useContext(WishlistContext); //access the context
 
-    const addItemToWishlist = (item) => {
-        setWishlistItems([...wishlistItems, item]);
-      };
 
-      const removeItemFromWishlist = (item) => {
-        setWishlistItems(wishlistItems.filter((wishlistItem) => wishlistItem !== item));
-      };
+    // const addItemToWishlist = (item) => {
+    //     setWishlistItems([...wishlistItems, item]);
+    //   };
+
+    //   const removeItemFromWishlist = (item) => {
+    //     setWishlistItems(wishlistItems.filter((wishlistItem) => wishlistItem !== item));
+    //   };
 
 
   return (
@@ -34,16 +28,17 @@ const Wishlist = () => {
     <h2>Wishlist</h2>
     {wishlistItems.length === 0 && <p>Your wishlist is empty.</p>}
     {wishlistItems.map((item) => (
-      <WishlistItem
-        key={item.name} // Important for performance with dynamic lists
-        name={item.name}
-        price={item.price}
-        onAddToWishlist={() => addItemToWishlist(item)}
-        onRemoveFromWishlist={() => removeItemFromWishlist(item)}
-      />
+      <div key={item.name} className="apartment">
+       <h3>{item.name}</h3>
+       <p1>{item.description}</p1>
+       <p1>{item.price}</p1>
+       {/* <button onClick={() => addItemToWishlist(item)}>Add to Wishlist</button> */}
+          {/* <button onClick={() => removeItemFromWishlist(item)}>Remove from Wishlist</button> */}
+          </div>
     ))}
   </div>
   )
+ 
 }
 
 export default Wishlist
