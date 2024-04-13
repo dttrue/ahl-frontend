@@ -50,3 +50,28 @@
   right: 10px; /* Adjust spacing as needed */
   transform: translateY(-50%); /* Fine-tune vertical alignment */
 }
+
+.flex-1 {
+  flex: 1;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vcenter {
+  display: flex;
+  align-items: center;
+}
+
+.hcenter {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-container {
+  position: relative;
+
+}

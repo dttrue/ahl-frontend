@@ -1,0 +1,55 @@
+/* Ensure the header or a container has a relative position */
+.homepage-header {
+    position: relative;
+   }
+
+   .header-homepage-link {
+       display: flex;
+       justify-content: center;
+       /* Center the "AHL" h1 */
+       align-items: center;
+       padding: 0 20px;
+   }
+
+   .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+   }
+
+
+.header-dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 150px;
+    background-color: #006AFF;
+  }
+
+  .link-container {
+    padding: 5px;
+  }
+   
+   /* Position the navbar absolutely within the header */
+   .navbar {
+    position: absolute;
+    top: 100%; /* Position it just below the header */
+    left: 0; /* Align it to the left */
+    background-color: #fff; /* Background color */
+   }
+   
+   /* Show the navbar when isNavVisible is true */
+   .navbar.show {
+    display: block;
+   }
+   
+   /* Responsive styles */
+   @media screen and (min-width: 750px) {
+    .navbar {
+       display: block; /* Show the navbar on larger screens */
+       width: auto; /* Reset width */
+    }
+   }
+
+   

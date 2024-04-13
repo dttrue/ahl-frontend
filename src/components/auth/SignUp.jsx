@@ -7,7 +7,7 @@ const SignUp = ()  => {
   const [password, setPassword] = useState(""); //sets email default empty string
 
   const signUp = (e) => {
-e.preventDefault();
+  e.preventDefault();
 
 createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
