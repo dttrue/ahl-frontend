@@ -43,6 +43,7 @@ function HousingDetails() {
         <p>6br: {projectDetails[0]._6_br_units}</p>
         <p>Rental Units: {projectDetails[0].counted_rental_units}</p>
         <p>Total Units: {projectDetails[0].total_units}</p>
+        <button onClick={() => addItemToWishlist(projectDetails[0])}>Add to Wishlist</button>
       </div>
       {/* Display rent information */}
       <div>
@@ -57,7 +58,7 @@ function HousingDetails() {
                   info.medianactualrent ||
                   info.highactualrent ||
                   "N/A"}
-                   <button onClick={() => addItemToWishlist(info)}>Add to Wishlist</button>
+                 
               </li>
 
             ))}
