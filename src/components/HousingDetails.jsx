@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ApartmentNameList from "./ApartmentNameList";
+import { WishlistContext } from "./wishlistContext"; //imports the context
 
 function HousingDetails() {
   const [projectDetails, setProjectDetails] = useState(null);
   const [projectRentInfo, setProjectRentInfo] = useState(null);
-  const [wishlistItems, setWishlistItems] = useState([]);
+  // const [wishlistItems, setWishlistItems] = useState([]);
+  const { addItemToWishlist } = useContext(WishlistContext); //Access the context
 
-  const addItemToWishlist = (item) => {
-      setWishlistItems([...wishlistItems, item]);
-    };
+  // const addItemToWishlist = (item) => {
+  //     setWishlistItems([...wishlistItems, item]);
+  //   };
 
   const location = useLocation();
   useEffect(() => {

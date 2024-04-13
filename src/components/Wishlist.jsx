@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { WishlistContext } from './wishlistContext'; //import the context
 
 
 const apartments = [
@@ -9,15 +10,17 @@ const apartments = [
 
 
 const Wishlist = () => {
-    const [wishlistItems, setWishlistItems] = useState(apartments);
+    // const [wishlistItems, setWishlistItems] = useState(apartments);
+    const { wishlistItems } = useContext(WishlistContext); //access the context
 
-    const addItemToWishlist = (item) => {
-        setWishlistItems([...wishlistItems, item]);
-      };
 
-      const removeItemFromWishlist = (item) => {
-        setWishlistItems(wishlistItems.filter((wishlistItem) => wishlistItem !== item));
-      };
+    // const addItemToWishlist = (item) => {
+    //     setWishlistItems([...wishlistItems, item]);
+    //   };
+
+    //   const removeItemFromWishlist = (item) => {
+    //     setWishlistItems(wishlistItems.filter((wishlistItem) => wishlistItem !== item));
+    //   };
 
 
   return (
@@ -30,7 +33,7 @@ const Wishlist = () => {
        <p1>{item.description}</p1>
        <p1>{item.price}</p1>
        {/* <button onClick={() => addItemToWishlist(item)}>Add to Wishlist</button> */}
-          <button onClick={() => removeItemFromWishlist(item)}>Remove from Wishlist</button>
+          {/* <button onClick={() => removeItemFromWishlist(item)}>Remove from Wishlist</button> */}
           </div>
     ))}
   </div>
