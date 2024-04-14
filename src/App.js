@@ -3,40 +3,21 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../src/css/App.css";
 import SignInModal from "./auth/SignIn";
 import CreateAccountModal from "./auth/SignUp";
+import { AuthProvider } from './authContext/AuthContext';
 import Wishlist from "./components/Wishlist";
 import Homepage from "./components/Homepage";
 import ProfilePage from "./components/Profile";
 import ApartmentNameList from "./components/ApartmentNameList";
 import HousingDetails from "./components/HousingDetails"; 
-import { Header } from "./components/Header";
 
 
 function App() {
 
   const [hasCurrentUser, setHasCurrentUser] = useState(false);
   const [searchResult, setSearchResult] = useState(null);
-  const [createAccountModalIsOpen, setCreateAccountModalIsOpen] = useState(false);
-  const [signInModalIsOpen, setSignInModalIsOpen] = useState(false);
-
-  const openSignInModal = () => {
-    setSignInModalIsOpen(true);
-      setCreateAccountModalIsOpen(false)
-    };
-  
-    const closeSignInModal = () => {
-      setSignInModalIsOpen(false);
-    };
-  
-    const openCreateAccountModal = () => {
-      setCreateAccountModalIsOpen(true);
-      setSignInModalIsOpen(false)
-    };
-  
-  const closeCreateAccountModal = () => {
-    setCreateAccountModalIsOpen(false);
-  };
 
   return (
+    <AuthProvider>
     <Router>
       <div className="container">
           <Header 
@@ -52,12 +33,17 @@ function App() {
             {/* Replace with your homepage content */}
             <Route path="/apartmentNameList" element={<ApartmentNameList searchResult={searchResult} />} />{" "}
             <Route path="/housingDetails" element={<HousingDetails />} />{" "}
+            <Route path="/signin" element={<SignIn/>} />{" "}
+            {/* SignIn component for login */}
+            <Route path="/signup" element={< CreateAccountModal />} />{" "}
+            {/* SignIn component for login */}
             <Route path='/profile' element={<ProfilePage/> } />
           </Routes>
-          {createAccountModalIsOpen && <CreateAccountModal onClose={closeCreateAccountModal} openSignIn={openSignInModal} />}
-          {signInModalIsOpen && <SignInModal isOpen={signInModalIsOpen} onClose={closeSignInModal} openCreateAccount={openCreateAccountModal}/>}
+          
+        
       </div>
     </Router>
+     </AuthProvider>
   );
 }
 
