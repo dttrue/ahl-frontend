@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "../src/css/App.css";
 import SignInModal from "./auth/SignIn";
 import CreateAccountModal from "./auth/SignUp";
+import { AuthProvider } from './authContext/AuthContext';
 import Wishlist from "./components/Wishlist";
 import Homepage from "./components/Homepage";
 import ProfilePage from "./components/Profile";
@@ -37,6 +38,7 @@ function App() {
   };
 
   return (
+    <AuthProvider>
     <Router>
       <div className="container">
           <Header 
@@ -58,6 +60,7 @@ function App() {
           {signInModalIsOpen && <SignInModal isOpen={signInModalIsOpen} onClose={closeSignInModal} openCreateAccount={openCreateAccountModal}/>}
       </div>
     </Router>
+     </AuthProvider>
   );
 }
 
