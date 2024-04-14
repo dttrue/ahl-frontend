@@ -54,17 +54,19 @@ The catch error block is for errors that occur during the get request. Error mes
           setError(error);
         } else {
           setSearchResult(data);
+          navigate("/apartmentNameList");
           setError("");
         }
       }
     );
   };
 
-  useEffect(() => {
-    if (searchResult) {
-      navigate("/apartmentNameList");
-    }
-  }, [searchResult]);
+  // useEffect(() => {
+  //   if (searchResult) {
+  //     console.log(searchResult)
+  //     navigate("/apartmentNameList");
+  //   }
+  // }, [searchResult]);
 
 
 /* handle change updates the search state with a value every time we search something new */

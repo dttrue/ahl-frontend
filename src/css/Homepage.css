@@ -5,13 +5,14 @@
    
   }
   
+  
   .homepage-header {
     flex: 1; 
     background-color: white;
     color: black;
     display: flex;
     justify-content: space-between;
-
+    max-height: 100px;
   }
   
   .homepage-body {
